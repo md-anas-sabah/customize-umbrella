@@ -54,8 +54,8 @@ h1 {
 }
 
 .color-swatch {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -94,7 +94,7 @@ h1 {
 .upload-btn {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
   background-color: #39b0ff;
   color: white;
   padding: 1rem 2rem;
@@ -102,11 +102,21 @@ h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-weight: 500;
-  justify-content: center;
+  width: 100%;
+  position: relative;
 }
 
 .upload-icon {
-  font-size: 1.2rem;
+  position: absolute;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.upload-btn span {
+  display: inline-block;
+  text-align: center;
 }
 
 .logo-preview-container {
@@ -125,7 +135,6 @@ h1 {
   display: none;
 }
 
-/* Loader Styles */
 .loader-container {
   position: absolute;
   top: 0;
@@ -156,7 +165,6 @@ h1 {
   }
 }
 
-/* Media Queries */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -178,7 +186,6 @@ h1 {
   }
 }
 
-/* Theme Colors */
 body.theme-blue {
   background-color: #f0f8ff;
 }
