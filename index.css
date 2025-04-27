@@ -31,7 +31,6 @@ body {
 #umbrella-img {
   width: 90%;
   max-width: 500px;
-  margin-right: 20px;
   transition: opacity 0.5s ease;
 }
 
@@ -54,8 +53,8 @@ h1 {
 }
 
 .color-swatch {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -106,23 +105,30 @@ h1 {
   position: relative;
 }
 
-.upload-icon {
+.upload-icon,
+.upload-loader {
   position: absolute;
   left: 20px;
   width: 20px;
   height: 20px;
+}
+
+.upload-icon {
   filter: brightness(0) invert(1);
 }
 
 .upload-loader {
-  position: absolute;
-  left: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top: 3px solid white;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
+  filter: brightness(0) invert(1);
+  animation: rotate 1s linear infinite;
+}
+
+#upload-text {
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
 }
 
 .cancel-upload {
@@ -146,24 +152,10 @@ h1 {
   opacity: 0.8;
 }
 
-#upload-text {
-  display: inline-block;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 60%;
-}
-
-.upload-btn span {
-  display: inline-block;
-  text-align: center;
-}
-
 .logo-preview-container {
   position: absolute;
-  bottom: 7%;
-  width: 10%;
+  bottom: 10%;
+  width: 20%;
   height: 10%;
   display: flex;
   justify-content: center;
@@ -188,51 +180,18 @@ h1 {
   z-index: 2;
 }
 
-.loader {
-  border: 5px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top: 5px solid #39b0ff;
+.loader-svg {
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite;
+  animation: rotate 1s linear infinite;
 }
 
-@keyframes spin {
+@keyframes rotate {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .umbrella-preview,
-  .customizer-panel {
-    width: 100%;
-  }
-
-  .customizer-panel {
-    padding: 1rem 0;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
   }
 }
 
@@ -260,14 +219,35 @@ body.theme-yellow {
   background-color: #ffc107;
 }
 
-.theme-blue .loader {
-  border-top-color: #39b0ff;
+.theme-blue .loader-svg {
+  filter: hue-rotate(0deg) saturate(1.5) brightness(1.2);
 }
 
-.theme-pink .loader {
-  border-top-color: #e91e63;
+.theme-pink .loader-svg {
+  filter: hue-rotate(320deg) saturate(2) brightness(1.1);
 }
 
-.theme-yellow .loader {
-  border-top-color: #ffc107;
+.theme-yellow .loader-svg {
+  filter: hue-rotate(45deg) saturate(2) brightness(1.3);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .umbrella-preview,
+  .customizer-panel {
+    width: 100%;
+  }
+
+  .customizer-panel {
+    padding: 1rem 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
 }
