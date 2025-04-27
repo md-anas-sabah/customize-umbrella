@@ -109,9 +109,50 @@ h1 {
 .upload-icon {
   position: absolute;
   left: 20px;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   filter: brightness(0) invert(1);
+}
+
+.upload-loader {
+  position: absolute;
+  left: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid white;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+.cancel-upload {
+  position: absolute;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.cancel-upload:hover {
+  opacity: 0.8;
+}
+
+#upload-text {
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
 }
 
 .upload-btn span {
@@ -154,6 +195,15 @@ h1 {
   width: 50px;
   height: 50px;
   animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {

@@ -49,7 +49,11 @@
           <div class="upload-button-wrapper">
             <label for="logo-upload" id="upload-btn" class="upload-btn">
               <img class="upload-icon" src="./images/upload_icon.svg" />
-              <span>UPLOAD LOGO</span>
+              <div class="upload-loader" style="display: none"></div>
+              <span id="upload-text">UPLOAD LOGO</span>
+              <button class="cancel-upload" style="display: none">
+                &times;
+              </button>
             </label>
             <input
               type="file"

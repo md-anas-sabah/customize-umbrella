@@ -6,7 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const uploadBtn = document.getElementById("upload-btn");
   const loader = document.getElementById("loader");
 
+  const uploadIcon = document.querySelector(".upload-icon");
+  const uploadLoader = document.querySelector(".upload-loader");
+  const uploadText = document.getElementById("upload-text");
+  const cancelButton = document.querySelector(".cancel-upload");
+
   let currentColor = "blue";
+  let currentUploadTask = null;
 
   setTheme(currentColor);
   colorSwatches[0].classList.add("active");
@@ -34,29 +40,61 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      showLoader();
+      startUploadUI(file.name);
 
       const reader = new FileReader();
+      currentUploadTask = reader;
+
       reader.onload = function (e) {
         setTimeout(() => {
-          logoPreview.src = e.target.result;
-          logoPreview.style.display = "block";
-          hideLoader();
-        }, 1000);
+          if (currentUploadTask) {
+            logoPreview.src = e.target.result;
+            logoPreview.style.display = "block";
+            resetUploadButton();
+          }
+        }, 1500);
       };
+
       reader.readAsDataURL(file);
     }
   });
 
-  // Function to change umbrella color
+  cancelButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    cancelUpload();
+  });
+
+  function startUploadUI(filename) {
+    uploadIcon.style.display = "none";
+    uploadLoader.style.display = "block";
+    uploadText.textContent = filename;
+    cancelButton.style.display = "flex";
+  }
+
+  function resetUploadButton() {
+    uploadIcon.style.display = "block";
+    uploadLoader.style.display = "none";
+    uploadText.textContent = "UPLOAD LOGO";
+    cancelButton.style.display = "none";
+    currentUploadTask = null;
+  }
+
+  function cancelUpload() {
+    if (currentUploadTask) {
+      currentUploadTask.abort();
+      currentUploadTask = null;
+    }
+
+    logoUpload.value = "";
+    resetUploadButton();
+  }
+
   function changeUmbrellaColor(color) {
-    // Show loader
     showLoader();
 
-    // Update current color
     currentColor = color;
 
-    // Remove active class from all swatches
     colorSwatches.forEach((swatch) => {
       swatch.classList.remove("active");
       if (swatch.getAttribute("data-color") === color) {
@@ -70,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setTimeout(() => {
       umbrellaImg.src = `images/${capitalizeFirstLetter(color)}.png`;
+
       umbrellaImg.onload = function () {
         umbrellaImg.style.opacity = 1;
         hideLoader();
@@ -80,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function showLoader() {
     loader.style.display = "flex";
   }
+
   function hideLoader() {
     loader.style.display = "none";
   }
